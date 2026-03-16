@@ -1,0 +1,609 @@
+Phase 1 – Technical Foundations
+Week 1 – Networking Fundamentals
+Goal
+
+Develop a deep understanding of networking concepts that form the foundation of cybersecurity.
+
+Topics Covered 
+
+1. What is a Network
+
+2. Public vs Private IP
+
+3. IPv4 Structure
+
+4. MAC Address
+
+5. Routers
+
+6. DNS
+
+7. Ports
+
+8. TCP vs UDP
+
+9. What happens when you type google.com
+
+1. What is a Network?
+
+A network is a group of devices connected together so they can communicate and share resources.
+
+Examples of Network Devices
+
+Computers (laptops, desktops)
+
+Servers
+
+Phones
+
+Routers
+
+IoT devices
+
+Security cameras
+
+Cloud servers
+
+What Makes a Network Work
+
+Three main components:
+
+1. Devices (Nodes)
+Endpoints such as laptops, servers, and smartphones.
+
+2. Connections
+The physical or wireless medium used to connect devices:
+
+Ethernet cables
+
+Fiber optic cables
+
+WiFi
+
+3. Protocols
+Rules that govern how devices communicate (for example TCP/IP).
+
+Analogy
+Networking Concept	Real World Equivalent
+Devices	Houses
+IP Address	Street address
+Protocols	Postal rules
+Router	Post office
+Cybersecurity Perspective
+
+In cybersecurity, a network is the attack surface where attackers attempt to:
+
+intercept traffic
+
+scan devices
+
+exploit services
+
+2. Public vs Private IP Addresses
+What is an IP Address?
+
+An IP address (Internet Protocol Address) is a unique identifier assigned to a device on a network.
+
+It allows devices to:
+
+send data
+
+receive data
+
+be identified on a network
+
+IPv4
+
+Example:
+
+192.168.1.15
+
+Characteristics:
+
+Four numbers separated by dots
+
+Each number ranges from 0–255
+
+32-bit address
+
+Total possible addresses:
+
+~4.3 billion
+
+Because IPv4 addresses are limited, IPv6 was created.
+
+IPv6
+
+Example:
+
+2001:0db8:85a3:0000:0000:8a2e:0370:7334
+
+Characteristics:
+
+128-bit address
+
+Extremely large address space
+
+Designed for the future growth of the internet
+
+Private IP Addresses
+
+Used inside local networks (LAN).
+
+Common ranges:
+
+192.168.0.0 – 192.168.255.255
+10.0.0.0 – 10.255.255.255
+172.16.0.0 – 172.31.255.255
+
+Characteristics:
+
+Not accessible directly from the internet
+
+Used inside homes, offices, and internal networks
+
+Public IP Addresses
+
+A public IP address:
+
+Is assigned by an Internet Service Provider (ISP)
+
+Is globally unique
+
+Is visible on the internet
+
+Websites see your public IP, not your device’s private IP.
+
+Cybersecurity Relevance
+
+IP addresses are used for:
+
+tracking attackers
+
+geolocation
+
+firewall rules
+
+blocking malicious traffic
+
+SIEM alerts
+
+network logging
+
+Example:
+
+A login attempt from a foreign country can be detected using IP logging.
+
+3. IPv4 Structure
+
+An IPv4 address:
+
+192.168.1.15
+
+Internally, it is a 32-bit binary number.
+
+Binary Representation
+11000000.10101000.00000001.00001111
+Structure
+
+IPv4 = 32 bits
+
+Split into 4 octets (8 bits each).
+
+Each octet:
+
+8 bits
+
+Range: 0–255
+
+2⁸ = 256 possible values
+
+Network vs Host Portion
+
+An IP address contains:
+
+[ Network Portion ] + [ Host Portion ]
+
+Example:
+
+192.168.1.15/24
+
+Meaning:
+
+/24 = subnet mask
+
+First 24 bits = network
+
+Last 8 bits = host
+
+Routers use this to determine:
+
+which network a device belongs to
+
+which specific device on that network is being addressed
+
+Why This Matters
+
+Important for:
+
+subnetting
+
+firewall rules
+
+access control
+
+lateral movement during attacks
+
+4. MAC Address
+
+A MAC Address (Media Access Control Address) is a hardware identifier assigned to a device’s network interface card (NIC).
+
+Network Interface Card (NIC)
+
+A NIC is a hardware component that allows a device to connect to a network.
+
+It converts data into:
+
+electrical signals (Ethernet)
+
+radio signals (WiFi)
+
+MAC Address Format
+
+Example:
+
+00:1A:2B:3C:4D:5E
+IP Address vs MAC Address
+IP Address	MAC Address
+Logical address	Physical address
+Can change	Usually permanent
+Works across networks	Works inside a local network
+Layer 3	Layer 2
+Simple Analogy
+Concept	Example
+IP Address	Apartment number
+MAC Address	Physical device in that apartment
+
+Routers use MAC addresses to deliver data within a LAN.
+
+Cybersecurity Relevance
+
+Attackers sometimes perform MAC spoofing, which allows them to impersonate other devices on the network.
+
+5. What is a Router?
+
+A router is a networking device that connects multiple networks and directs traffic between them.
+
+Your Home Router Connects
+
+Your LAN
+
+Your ISP
+
+The Internet (WAN)
+
+Router Functions
+
+Routing network traffic
+
+NAT (Network Address Translation)
+
+DHCP (assigns private IP addresses)
+
+Basic firewall protection
+
+Router Analogy
+
+A router acts like:
+
+a traffic cop
+
+a translator
+
+a security guard
+
+Network Request Flow
+
+Example:
+
+Your device → Router → ISP → Internet → Server → Back to you
+Step 1 — Your Device
+
+Example device:
+
+Private IP: 192.168.1.12
+
+MAC address: A4:5E:60:1B:92:10
+
+The device sends a request to the router.
+
+Step 2 — Router
+
+The router:
+
+receives the packet
+
+performs NAT
+
+replaces the private IP with a public IP
+
+Example:
+
+From: 73.182.54.201
+To: YouTube server
+Step 3 — ISP
+
+Your Internet Service Provider (ISP) routes the traffic into larger internet infrastructure.
+
+Examples:
+
+Comcast
+
+AT&T
+
+Step 4 — Internet Infrastructure
+
+Traffic travels through:
+
+routers
+
+fiber optic cables
+
+exchange points
+
+data centers
+
+Eventually it reaches the destination server.
+
+Step 5 — Server Response
+
+The server:
+
+processes the request
+
+sends data back
+
+Examples of returned data:
+
+HTML
+
+CSS
+
+JavaScript
+
+images
+
+video
+
+Step 6 — Return Path
+
+Response travels:
+
+Server → Internet → ISP → Router
+Step 7 — Router Translation
+
+The router translates the response back to:
+
+192.168.1.12
+
+The data is delivered to the correct device using its MAC address.
+
+All of this happens in milliseconds.
+
+6. DNS (Domain Name System)
+
+DNS translates human-readable domain names into IP addresses.
+
+Example:
+
+google.com
+
+Computers understand:
+
+142.250.190.78
+
+DNS functions like the internet’s phonebook.
+
+DNS Process
+
+User types google.com
+
+Computer asks a DNS resolver
+
+DNS server returns an IP address
+
+Computer connects to that IP
+
+Without DNS, users would need to remember IP addresses for every website.
+
+Cybersecurity Relevance
+
+DNS is commonly abused for:
+
+DNS tunneling (data exfiltration)
+
+malware command-and-control
+
+phishing domains
+
+DNS spoofing
+
+7. Ports
+
+An IP address identifies a device.
+
+A port identifies a service running on that device.
+
+Analogy
+Concept	Example
+IP Address	Apartment building
+Port	Apartment number
+
+Example:
+
+142.250.190.78:443
+
+Meaning:
+
+IP: Google server
+
+Port 443: HTTPS service
+
+Common Ports
+Port	Service
+80	HTTP
+443	HTTPS
+22	SSH
+21	FTP
+25	SMTP
+53	DNS
+
+Total possible ports:
+
+65,535
+
+Attackers scan ports to identify:
+
+open services
+
+potential vulnerabilities
+
+Tools like Nmap perform port scanning.
+
+8. TCP vs UDP
+
+These are transport layer protocols.
+
+They control how data is transmitted.
+
+TCP (Transmission Control Protocol)
+
+Characteristics:
+
+Reliable
+
+Connection-oriented
+
+Slower
+
+Ordered delivery
+
+Used for:
+
+web browsing
+
+email
+
+file transfers
+
+TCP 3-Way Handshake
+
+SYN
+
+SYN-ACK
+
+ACK
+
+This establishes a connection before data transfer.
+
+UDP (User Datagram Protocol)
+
+Characteristics:
+
+Faster
+
+No connection
+
+No guaranteed delivery
+
+No order guarantee
+
+Used for:
+
+online gaming
+
+streaming
+
+voice calls
+
+DNS queries
+
+UDP prioritizes speed over reliability.
+
+Cybersecurity Perspective
+
+TCP attacks:
+
+SYN flood attacks
+
+session hijacking
+
+UDP attacks:
+
+amplification attacks
+
+DDoS attacks
+
+9. What Happens When You Type google.com
+
+Step-by-step process:
+
+User types google.com
+
+Computer asks DNS for the IP
+
+DNS returns something like 142.250.190.78
+
+TCP handshake begins
+
+Client sends SYN
+
+Server responds SYN-ACK
+
+Client responds ACK
+
+Connection established on port 443 (HTTPS)
+
+Browser sends request:
+
+GET / HTTP/1.1
+
+Server responds with:
+
+HTML
+
+CSS
+
+JavaScript
+
+images
+
+Data travels:
+
+Server → Internet → ISP → Router → Your device
+
+Router translates the IP using NAT
+
+Browser renders the page
+
+All of this occurs in milliseconds.
+
+Why This Matters for Cybersecurity
+
+Understanding this full process helps explain:
+
+packet sniffing
+
+man-in-the-middle attacks
+
+port scanning
+
+firewall rules
+
+web application attacks
+
+reverse shells
+
+malware beaconing
+
+These networking concepts are foundational for cybersecurity.
